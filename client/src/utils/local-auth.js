@@ -1,17 +1,17 @@
 import axios from 'axios'
 
 let LOCALAPI = {
-    singupUser: (data) => {
-         return axios.post('/user', data)
+    singUpUser: (data) => {
+        return axios.post('/_signup', data)
     },
     loginUser: (data) => {
-        return axios.post('/user/login', data)
+        return axios.post('/_user/login', data)
     },
     getUserData: (data) => {
-        return axios.get('/user')
+        return axios.get('/_user')
     },
     getLogout: () => {
-        return axios.get('/user/logout');
+        return axios.get('/_user/logout');
     }
 }
 

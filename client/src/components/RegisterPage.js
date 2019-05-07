@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import AUTHAPI from '../utils/local-auth';
 import { Link, Redirect } from 'react-router-dom';
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
 
     state = {
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         errMessage: null
@@ -23,23 +25,26 @@ class LoginPage extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         console.log(event.target);
-        AUTHAPI.loginUser({
+        AUTHAPI.singUpUser({
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
             email: this.state.email,
             password: this.state.password
         }).then(response => {
-
+            
             // USER DATA
             let user = response.data;
 
             console.log(user)
             
             // VERIFY FOR EMAIL AND USER
-            if (user && user.email) {
+            if (user && user.email && user.first_name && user.last_name) {
                 
                 this.props.setUser(user);
                 this.setState({
                     errMessage: null
                 });
+                
             }
             else {
                 this.setState({
@@ -59,16 +64,38 @@ class LoginPage extends Component {
         if (this.props.user && this.props.user.email) {
             return <Redirect to="/" />;
         }
+        
         return (
             <div>
                 <div className="form-block">
 
                     <form className="search">
-                        <div className="imput-form-block">
+                        <div className="input-form-block">
                             <div className="text-login">
-                                Login Form
+                                Sign Up Form
                             </div>
                             <div className="form-group">
+
+                                <label htmlFor="first_name">First Name:</label>
+                                <input
+                                    value={this.state.first_name}
+                                    onChange={this.handleInputChange}
+                                    name="first_name"
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="First name"
+                                    id="first_name"
+                                />
+                                <label htmlFor="second_name">Second Name:</label>
+                                <input
+                                    value={this.state.second_name}
+                                    onChange={this.handleInputChange}
+                                    name="second_name"
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Last name"
+                                    id="second_name"
+                                />
                                 <label htmlFor="email">Email:</label>
                                 <input
                                     value={this.state.email}
@@ -78,10 +105,7 @@ class LoginPage extends Component {
                                     className="form-control"
                                     placeholder="Type in Email"
                                     id="email"
-                                />
-                                
-                                <br />
-                            
+                                />                          
                                 <label htmlFor="password">Password:</label>
                                 <input
                                     value={this.state.password}
@@ -94,9 +118,9 @@ class LoginPage extends Component {
                                 />
                             </div>
 
-
+                            
                             <button type="submit" onClick={this.handleFormSubmit} className="btn-login">
-                                Login                            
+                                Sign Up                            
                             </button>
                         </div>
                     </form>
@@ -110,4 +134,4 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage;
+export default RegisterPage;   

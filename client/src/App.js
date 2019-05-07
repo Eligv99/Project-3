@@ -5,6 +5,7 @@ import Homepage from "./pages/Homepage"
 import SupportPage from "./pages/SupportPage"
 import LoginPage from "./pages/Login"
 import Registerpage from "./pages/Register"
+import Account from "./pages/UserAccount"
 
 class App extends Component {
   // EMPTY USER AS DEFAULT
@@ -31,14 +32,27 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" component={Homepage} />
+            <Route exact path="/" render ={
+              () => (
+                <Homepage {...this.props} setUser={this.setUser} user={this.state.user} />
+              )
+              } />
             <Route exact path="/support" component={SupportPage} />
+            <Route exact path="/account" render={
+              () => (
+                <Account {...this.props} setUser={this.setUser} user={this.state.user} />
+              )
+            } />
             <Route exact path="/login" render ={
               () => (
                 <LoginPage {...this.props} setUser={this.setUser} user={this.state.user} />
               )
             } />
-            <Route exact path="/register" component={Registerpage} />
+            <Route exact path="/signup" render ={
+              () => (
+                <Registerpage {...this.props} setUser={this.setUser} user={this.state.user} />
+              )
+            } />
           </Switch>
         </div>
       </Router>

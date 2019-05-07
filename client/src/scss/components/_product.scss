@@ -27,15 +27,18 @@ a.bypassInterstitialPage {
 .product {
   background: $white;
   margin: 3em;
-  width: 200px;
+  width: 47em;
   border-radius: 2px;
   .product-image {
     overflow: hidden;
+    height: 26em;
+    width: 47em;
     border-radius: 2px 2px 0 0;
-    max-height: 200px;
+   
     img {
       cursor: zoom-in;
-      width: 100%;
+      width: 239px;
+      // float: left;
       height: auto;
       transition: transform 300ms ease-in;
       transform: scale(1);
@@ -49,13 +52,22 @@ a.bypassInterstitialPage {
   }
   .product-name {
     font-weight: normal;
-    font-size: 16px;
+    font-size: 32px;
     line-height: 20px;
+    position: relative;
+    top: -6em;
+    text-align: left;
     margin-bottom: 8px;
+    margin-bottom: 73px;
+    float: right;
+    right: 8em;
   }
   .product-price {
     font-size: 22px;
     font-weight: 700;
+    position: relative;
+    top: -4em;
+    left: 13em;
     line-height: 22px;
     margin-bottom: 16px;
     &:before {
@@ -64,9 +76,10 @@ a.bypassInterstitialPage {
   }
   .product-name,
   .product-price {
-    color: $gray-medium;
+    color: #666;
     padding: 0 16px;
-    text-align: center;
+    position: relative;
+    text-align: left;
   }
   .product-action {
     padding: 16px;
@@ -88,6 +101,8 @@ a.bypassInterstitialPage {
   display: -webkit-flex;
   color: $gray-medium;
   max-width: 120px;
+  position: relative;
+  left: 7em;
   margin: 0 auto;
   .increment,
   .decrement {

@@ -22,7 +22,7 @@ class Product extends Component {
           quantity: quantity
         }
       },
-      function() {
+      function () {
         this.props.addToCart(this.state.selectedProduct);
       }
     );
@@ -30,7 +30,7 @@ class Product extends Component {
       {
         isAdded: true
       },
-      function() {
+      function () {
         setTimeout(() => {
           this.setState({
             isAdded: false,
@@ -50,7 +50,7 @@ class Product extends Component {
           id: id
         }
       },
-      function() {
+      function () {
         this.props.openModal(this.state.quickViewProdcut);
       }
     );
@@ -77,29 +77,33 @@ class Product extends Component {
               quantity
             )}
           />
-        </div>
-        <h4 className="product-name">{this.props.name}</h4>
-        <p className="product-price">{this.props.price}</p>
-        <Counter
-          productQuantity={quantity}
-          updateQuantity={this.props.updateQuantity}
-          resetQuantity={this.resetQuantity}
-        />
-        <div className="product-action">
-          <button
-            className={!this.state.isAdded ? "" : "added"}
-            type="button"
-            onClick={this.addToCart.bind(
-              this,
-              image,
-              name,
-              price,
-              id,
-              quantity
-            )}
-          >
-            {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
-          </button>
+          <div className="text-product">          
+           
+            <h4 className="product-name">{this.props.name}</h4> 
+            <p className="product-price">{this.props.price}</p> 
+            
+          </div>
+          <Counter
+            productQuantity={quantity}
+            updateQuantity={this.props.updateQuantity}
+            resetQuantity={this.resetQuantity}
+          />
+          <div className="product-action">
+            <button
+              className={!this.state.isAdded ? "" : "added"}
+              type="button"
+              onClick={this.addToCart.bind(
+                this,
+                image,
+                name,
+                price,
+                id,
+                quantity
+              )}
+            >
+              {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
+            </button>
+          </div>
         </div>
       </div>
     );

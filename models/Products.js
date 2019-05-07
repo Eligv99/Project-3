@@ -3,30 +3,30 @@ module.exports = (sequelize, DataTypes) => {
 
     var Products = sequelize.define('Product', {
 
-        ProductId: {
+        productId: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        ProductName: {
+        productName: {
             type: DataTypes.STRING
         },
-        ProductPrice: {
+        productPrice: {
             type: DataTypes.FLOAT
         },
-        ProductDescription: {
+        productDescription: {
             type: DataTypes.STRING
         },
-        ProductImage: {
+        productImage: {
             type: DataTypes.STRING
         },
-        ProductThumb: {
+        productThumb: {
             type: DataTypes.STRING
         },
-        ProductCategoryID: {
+        productCategoryID: {
             type: DataTypes.INTEGER
         },
-        ProductStok: {
+        productStok: {
             type: DataTypes.FLOAT
         },
 

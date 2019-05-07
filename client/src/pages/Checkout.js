@@ -169,7 +169,7 @@ class Login extends Component {
                 />
                 <InfoBar />
 
-                <LoginPage/>
+                
                 
                 <Footer />
             </div>

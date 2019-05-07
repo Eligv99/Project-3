@@ -11,56 +11,31 @@ class UserData extends Component{
             }
         })
     }
-
-    logout = () => {
-        AUTHAPI.getLogout().then( out => {
-          this.setState({
-            user: {}
-          })
-          window.location = '/account';
-        })
-    };
-
     render() {
 
         const f_name = (this.props.user.first_name);
-        const s_name = (this.props.user.last_name);
+        const s_name = (this.props.user.second_name);
         const email = (this.props.user.email);
 
         console.log(this.props.user)
 
         return (
-            <div className="user-data">
+            <div>
                 <div className="user-block">
                     { this.props.user.email ? (
 
                         <ul>
                             <li> First Name : {f_name} </li>
                             <br/>
-                            <li> Last Name : {s_name} </li>
+                            <li> Second Name : {s_name} </li>
                             <br/>
                             <li> Email : {email} </li>
                         </ul>) 
                         // TRUE
                         : 
                         // FALSE
-                        (<p>{`Please sign in at `} <Link to="/signup">Sign Up</Link> OR <Link to="/login">Login</Link></p>)
+                        (<p>{`Please sign in at `} <Link to="/register">Sign Up</Link> </p>)
                     }
-
-                    <br/>
-
-                    <Link to="/">
-                        <button>Home</button>
-                    </Link>
-
-                    <br/>
-                    <br/>
-
-
-                    <Link>
-                        <button onClick={this.logout}>Logout</button>
-                    </Link>
-
                 </div>
             </div>
         );

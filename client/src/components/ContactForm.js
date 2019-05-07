@@ -6,7 +6,7 @@ const ContactForm = () => (
     <div className="support-container">
         
         <div className="support-info">
-            <h2>We want our costumer to have a good experince if any convinience you may contact us filling this form below. </h2>
+            <h2>We want our costumer to have a good experince. If any convinience you may contact us filling this form below. </h2>
         </div>
 
         <form className="contact-form" method="POST" action="/contact">

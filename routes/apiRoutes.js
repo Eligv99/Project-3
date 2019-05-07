@@ -1,21 +1,23 @@
 
 const db = require('../models');
 const bcrypt = require('bcrypt')
-module.exports = (app, passport, passwordSalt) => {
+const Product = require('../models/Products');
 
-    app.get("/cheese", (req, res) => {
-        res.json({ message: "cheese inside"})
-    })
+module.exports = (app, passport, passwordSalt) => {
       
-    // TESTING
+    // TESTING ====================================
     app.get("/_api/non-cached", (req, res) => {
         res.json({ random: Math.random() });
     });
     app.get("/api/cached", (req, res) => {
         res.json({ random: Math.random() });
     });
+    // TESTING ====================================
+
+    // USER ========================================
+
     // LOCAL-LOGIN
-    app.post('/_signup', (req, res) => {
+    app.post('/_user/signup', (req, res) => {
         //try to find user
         db.User.findOne({
             where: {
@@ -23,6 +25,7 @@ module.exports = (app, passport, passwordSalt) => {
             }
         })
         .then(function(user){
+            
             if(!user){
                 let secure_user = req.body;
                 bcrypt.hash(secure_user.password, passwordSalt.value, function(err, hash) {
@@ -64,7 +67,9 @@ module.exports = (app, passport, passwordSalt) => {
             // a secure way to filter your object properties
             // only expose what you need to expose
             temp.email = req.user.email;
-            temp.name = req.user.name;
+            temp.first_name = req.user.first_name;
+            temp.last_name = req.user.last_name;
+
             res.json(temp);
         }
         else{
@@ -72,14 +77,16 @@ module.exports = (app, passport, passwordSalt) => {
         }
     });
 
-    app.get('/user', (req, res) => {
+    app.get('/_user', (req, res) => {
 
         if(req.user){
             let temp = {};
             // a secure way to filter your object properties
-            // only expose what you need to expose
+
             temp.email = req.user.email;
-            temp.name = req.user.name;
+            temp.first_name = req.user.first_name;
+            temp.last_name = req.user.last_name;
+
             res.json(temp);
         }
         else{
@@ -87,13 +94,49 @@ module.exports = (app, passport, passwordSalt) => {
         }
     });
 
-    app.get('/user/logout', function(req, res){
+    app.get('/_user/logout', function(req, res){
         req.logout();
         res.json(true);
     });
 
-    // ==========================================
-    // NODEMAILER
+    // USER ========================================
+
+    // PRODUCTS ====================================
+
+    app.get('/', (req, res) => {
+        // Get all products 
+        db.Product.findAll({})
+        .then((products) => {
+            res.status(200).send(products)
+
+        }).catch((err) => {
+            res.status(500).send({
+                error: "Could not retrieve products"
+            })
+        })
+    })
+
+    app.post('/_products', (req, res) => {
+        // Add a new products 
+        db.Product.create({
+            productName: req.body.productName,
+            productDescription: req.body.productDescription,
+            productPrice: req.body.productPrice,
+            productImage: req.body.productImage,
+            productStok: req.body.productStok
+        }).then((product) => {
+            res.status(200).send(product)
+        }).catch((err) => {
+            res.status(500).send({
+                error: "Could not retrieve products"
+            })
+        })
+    })
+
+    // PRODUCTS ====================================
+
+
+    // NODEMAILER ==========================================
     // app.post('/contact', (req, res) => {
     //     const { email = '', name = '', message = '' } = req.body
         
@@ -105,6 +148,6 @@ module.exports = (app, passport, passwordSalt) => {
     //         res.redirect('/#error');
     //       })
     //     })
-    // ==========================================
+    // NODEMAILER ==========================================
 
 }

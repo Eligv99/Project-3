@@ -4,7 +4,7 @@ import CartScrollBar from "./CartScrollBar";
 import Counter from "./Counter";
 import EmptyCart from "../empty-states/EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
-import { findDOMNode } from "react-dom";
+import { findDOMNode } from 'react-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -15,21 +15,25 @@ class Header extends Component {
       mobileSearch: false
     };
   }
+  
   handleCart(e) {
     e.preventDefault();
     this.setState({
       showCart: !this.state.showCart
     });
   }
+
   handleSubmit(e) {
     e.preventDefault();
   }
+
   handleMobileSearch(e) {
     e.preventDefault();
     this.setState({
       mobileSearch: true
     });
   }
+
   handleSearchNav(e) {
     e.preventDefault();
     this.setState(
@@ -42,18 +46,20 @@ class Header extends Component {
       }
     );
   }
+
   handleClickOutside(event) {
     const cartNode = findDOMNode(this.refs.cartPreview);
     const buttonNode = findDOMNode(this.refs.cartButton);
-    if (cartNode.classList.contains("active")) {
+    if (cartNode.classList.contains("")) {
       if (!cartNode || !cartNode.contains(event.target)) {
         this.setState({
-          showCart: false
+          showCart: true
         });
         event.stopPropagation();
       }
     }
   }
+
   componentDidMount() {
     document.addEventListener(
       "click",
@@ -127,7 +133,7 @@ class Header extends Component {
           </Link>
         </li>
         <li className="">
-          <Link to="/register" className="a-auth">
+          <Link to="/signup" className="a-auth">
             Register
           </Link>
         </li>
@@ -258,7 +264,7 @@ class Header extends Component {
           <div className="register-login">
               <div className="welcome">
                 <h3>Welcome</h3>
-                <div className="user-auth">{localStorage.usertoken ? userLinks : loginRegLink}</div>
+                <div className="user-auth">{this.props.user ? userLinks : loginRegLink}</div>
               </div>
           </div>
         </div>

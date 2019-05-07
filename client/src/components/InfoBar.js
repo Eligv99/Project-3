@@ -9,7 +9,7 @@ class InfoBar extends Component {
                     <span className="hyper-links">  /  <br /></span>
                     <a className="hyper-links" href="/">Home </a>
                     <span className="hyper-links">  /  <br /></span>
-                    <a className="hyper-links" href="#">Account </a>
+                    <a className="hyper-links" href="/account">Account </a>
                 </div>
             </div>
         );

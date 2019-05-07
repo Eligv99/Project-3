@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import InfoBar from "../components/InfoBar"
-import Products from "../components/Products";
 import Footer from "../components/Footer";
-import QuickView from "../components/QuickView";
+import Register from "../components/RegisterPage"
 import "../scss/style.scss";
 
 class App extends Component {
@@ -169,20 +168,10 @@ class App extends Component {
                     productQuantity={this.state.moq}
                 />
                 <InfoBar />
-                <Products
-                    productsList={this.state.products}
-                    searchTerm={this.state.term}
-                    addToCart={this.handleAddToCart}
-                    productQuantity={this.state.quantity}
-                    updateQuantity={this.updateQuantity}
-                    openModal={this.openModal}
-                />
+
+                <Register/>
+                
                 <Footer />
-                <QuickView
-                    product={this.state.quickViewProduct}
-                    openModal={this.state.modalActive}
-                    closeModal={this.closeModal}
-                />
             </div>
         );
     }

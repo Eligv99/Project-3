@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import AUTHAPI from "../utils/local-auth"
 import Header from "../components/Header";
 import InfoBar from "../components/InfoBar"
 import Products from "../components/Products";
@@ -152,6 +153,16 @@ class App extends Component {
         });
     }
 
+    logout = () => {
+        AUTHAPI.getLogout().then( out => {
+          this.setState({
+            user: {}
+          })
+          window.location = '/logout';
+        })
+    };
+    
+
     render() {
         return (
             <div className="container">
@@ -167,6 +178,7 @@ class App extends Component {
                     categoryTerm={this.state.category}
                     updateQuantity={this.updateQuantity}
                     productQuantity={this.state.moq}
+                    logout={this.logout}
                 />
                 <InfoBar />
                 <Products
