@@ -16,9 +16,12 @@ class Products extends Component {
 
     function searchingFor(term) {
       return function (x) {
-        return x.name.toLowerCase().includes(term.toLowerCase()) || !term;
+        console.log(x);
+        return x.name.toString().toLowerCase().includes(term.toLowerCase()) || !term;
       };
     }
+
+    //RENDER PRODUCTS BY SEARCH 
     productsData = this.props.productsList
       .filter(searchingFor(term))
       .map(product => {

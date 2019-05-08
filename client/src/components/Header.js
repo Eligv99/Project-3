@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {Link, withRouter} from 'react-router-dom'
 import CartScrollBar from "./CartScrollBar";
-import Counter from "./Counter";
 import EmptyCart from "../empty-states/EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import { findDOMNode } from 'react-dom';
@@ -49,11 +48,11 @@ class Header extends Component {
 
   handleClickOutside(event) {
     const cartNode = findDOMNode(this.refs.cartPreview);
-    const buttonNode = findDOMNode(this.refs.cartButton);
-    if (cartNode.classList.contains("")) {
-      if (!cartNode || !cartNode.contains(event.target)) {
+    // const buttonNode = findDOMNode(this.refs.cartButton);
+    if (cartNode.classList.contains("active")) {
+      if (!cartNode) {
         this.setState({
-          showCart: true
+          showCart: false
         });
         event.stopPropagation();
       }

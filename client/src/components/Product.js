@@ -6,6 +6,7 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      quantity: 1,
       selectedProduct: {},
       quickViewProdcut: {},
       isAdded: false
@@ -55,12 +56,15 @@ class Product extends Component {
       }
     );
   }
+
   render() {
+
     let image = this.props.image;
     let name = this.props.name;
     let price = this.props.price;
     let id = this.props.id;
-    let quantity = this.props.productQuantity;
+    let description = this.props.description;
+    let quantity = this.props.quantity;
 
     return (
       <div className="product">
@@ -79,8 +83,16 @@ class Product extends Component {
           />
           <div className="text-product">          
            
-            <h4 className="product-name">{this.props.name}</h4> 
-            <p className="product-price">{this.props.price}</p> 
+            <ul>
+
+              <li className=""><h4>{this.props.name}</h4></li>
+              <li className="">{this.props.description} </li>
+              <li className="">{this.props.price} </li>
+
+            </ul>
+            {/* <h4 className="product-name">{this.props.name}</h4> 
+            <h5 className="product-name">{this.props.description}</h5>
+            <p className="product-price">{this.props.price}</p>  */}
             
           </div>
           <Counter

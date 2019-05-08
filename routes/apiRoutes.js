@@ -103,7 +103,8 @@ module.exports = (app, passport, passwordSalt) => {
 
     // PRODUCTS ====================================
 
-    app.get('/', (req, res) => {
+    // FINDALL
+    app.get('/_products', (req, res) => {
         // Get all products 
         db.Product.findAll({})
         .then((products) => {
@@ -116,14 +117,15 @@ module.exports = (app, passport, passwordSalt) => {
         })
     })
 
-    app.post('/_products', (req, res) => {
+    app.post('/_products/create', (req, res) => {
         // Add a new products 
         db.Product.create({
-            productName: req.body.productName,
-            productDescription: req.body.productDescription,
-            productPrice: req.body.productPrice,
-            productImage: req.body.productImage,
-            productStok: req.body.productStok
+            name: req.body.name,
+            price: req.body.price,
+            image: req.body.image,
+            description: req.body.description,
+            catergory: req.body.catergory
+            
         }).then((product) => {
             res.status(200).send(product)
         }).catch((err) => {
@@ -132,6 +134,23 @@ module.exports = (app, passport, passwordSalt) => {
             })
         })
     })
+
+    app.delete('/_products/delete', (req, res) => {
+        // Add a new products 
+        db.Product.deleteAll({
+            where: {
+                name: req.body.name
+            }
+        })
+        .then((cb) => {
+            res.status(200).send(cb)
+        }).catch((err) => {
+            res.status(500).send({
+                error: "Could not delete products"
+            })
+        })
+    })
+
 
     // PRODUCTS ====================================
 

@@ -23,6 +23,7 @@ class App extends Component {
             quickViewProduct: {},
             modalActive: false
         };
+
         this.handleSearch = this.handleSearch.bind(this);
         this.handleMobileSearch = this.handleMobileSearch.bind(this);
         this.handleCategory = this.handleCategory.bind(this);
@@ -37,14 +38,15 @@ class App extends Component {
     }
     // Fetch Initial Set of Products from external API
     getProducts() {
-        let url =
-            "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
-        axios.get(url).then(response => {
+        console.log('test');
+
+        axios.get('/_products').then(response => {
             this.setState({
                 products: response.data
             });
         });
     }
+
     componentWillMount() {
         this.getProducts();
     }
@@ -53,35 +55,45 @@ class App extends Component {
     handleSearch(event) {
         this.setState({ term: event.target.value });
     }
+
     // Mobile Search Reset
     handleMobileSearch() {
         this.setState({ term: "" });
     }
+
     // Filter by Category
     handleCategory(event) {
         this.setState({ category: event.target.value });
         console.log(this.state.category);
     }
+
     // Add to Cart
     handleAddToCart(selectedProducts) {
+
         let cartItem = this.state.cart;
         let productID = selectedProducts.id;
-        let productQty = selectedProducts.quantity;
+        let productQty = selectedProducts.qty;
+
         if (this.checkProduct(productID)) {
             console.log("hi");
+
             let index = cartItem.findIndex(x => x.id == productID);
-            cartItem[index].quantity =
-                Number(cartItem[index].quantity) + Number(productQty);
+
+            cartItem[index].quantity = Number(cartItem[index].quantity) + Number(productQty);
+
             this.setState({
                 cart: cartItem
             });
+
         } else {
             cartItem.push(selectedProducts);
         }
+
         this.setState({
             cart: cartItem,
             cartBounce: true
         });
+        
         setTimeout(
             function () {
                 this.setState({

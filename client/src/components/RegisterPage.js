@@ -30,21 +30,24 @@ class RegisterPage extends Component {
             last_name: this.state.last_name,
             email: this.state.email,
             password: this.state.password
+
         }).then(response => {
-            
+
             // USER DATA
             let user = response.data;
 
             console.log(user)
-            
+
             // VERIFY FOR EMAIL AND USER
             if (user && user.email && user.first_name && user.last_name) {
-                
+
                 this.props.setUser(user);
+
                 this.setState({
                     errMessage: null
                 });
-                
+
+                return <Redirect to="/" />;
             }
             else {
                 this.setState({
@@ -64,7 +67,7 @@ class RegisterPage extends Component {
         if (this.props.user && this.props.user.email) {
             return <Redirect to="/" />;
         }
-        
+
         return (
             <div>
                 <div className="form-block">
@@ -88,9 +91,9 @@ class RegisterPage extends Component {
                                 />
                                 <label htmlFor="second_name">Second Name:</label>
                                 <input
-                                    value={this.state.second_name}
+                                    value={this.state.last_name}
                                     onChange={this.handleInputChange}
-                                    name="second_name"
+                                    name="last_name"
                                     type="text"
                                     className="form-control"
                                     placeholder="Last name"
@@ -105,7 +108,7 @@ class RegisterPage extends Component {
                                     className="form-control"
                                     placeholder="Type in Email"
                                     id="email"
-                                />                          
+                                />
                                 <label htmlFor="password">Password:</label>
                                 <input
                                     value={this.state.password}
@@ -118,14 +121,14 @@ class RegisterPage extends Component {
                                 />
                             </div>
 
-                            
+
                             <button type="submit" onClick={this.handleFormSubmit} className="btn-login">
-                                Sign Up                            
+                                Sign Up
                             </button>
                         </div>
                     </form>
 
-                    
+
 
                 </div>
             </div>

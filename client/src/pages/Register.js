@@ -15,9 +15,9 @@ class App extends Component {
             totalItems: 0,
             totalAmount: 0,
             term: "",
-            category: "",
+            // category: "",
             cartBounce: false,
-            quantity: 1,
+            // quantity: 1,
             quickViewProduct: {},
             modalActive: false
         };
@@ -34,18 +34,18 @@ class App extends Component {
         this.closeModal = this.closeModal.bind(this);
     }
     // Fetch Initial Set of Products from external API
-    getProducts() {
-        let url =
-            "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
-        axios.get(url).then(response => {
-            this.setState({
-                products: response.data
-            });
-        });
-    }
-    componentWillMount() {
-        this.getProducts();
-    }
+    // getProducts() {
+    //     let url =
+    //         "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
+    //     axios.get(url).then(response => {
+    //         this.setState({
+    //             products: response.data
+    //         });
+    //     });
+    // }
+    // componentWillMount() {
+    //     this.getProducts();
+    // }
 
     // Search by Keyword
     handleSearch(event) {

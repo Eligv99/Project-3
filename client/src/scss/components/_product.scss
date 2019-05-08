@@ -2,10 +2,10 @@
 .categories-block {
   position: absolute;
   margin-top: 4em;
-  margin-left: 14%;
+  margin-left: 12%;
   background: white;
   width: 19%;
-  height: 72%;
+  height: 45%;
 }
 
 #dim-Category {
@@ -33,6 +33,7 @@ a.bypassInterstitialPage {
     overflow: hidden;
     height: 26em;
     width: 47em;
+    padding: 1em;
     border-radius: 2px 2px 0 0;
    
     img {
@@ -60,14 +61,14 @@ a.bypassInterstitialPage {
     margin-bottom: 8px;
     margin-bottom: 73px;
     float: right;
-    right: 8em;
+    right: 10em;  
   }
   .product-price {
     font-size: 22px;
     font-weight: 700;
     position: relative;
     top: -4em;
-    left: 13em;
+    left: 38%;
     line-height: 22px;
     margin-bottom: 16px;
     &:before {
@@ -102,7 +103,7 @@ a.bypassInterstitialPage {
   color: $gray-medium;
   max-width: 120px;
   position: relative;
-  left: 7em;
+  left: 4em;  
   margin: 0 auto;
   .increment,
   .decrement {
