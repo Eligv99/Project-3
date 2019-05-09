@@ -47,11 +47,11 @@ class LoginPage extends Component {
                 });
             }
             else {
-                
-                window.location.assign('/login')
+
+                window.location.assign('/')
 
                 this.setState({
-                    errMessage: "Try again."
+                    errMessage: "Logged In"
                 });
             }
         })
