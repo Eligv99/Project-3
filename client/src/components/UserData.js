@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 class UserData extends Component{
 
-
     logout = () => {
         AUTHAPI.getLogout().then( out => {
           this.setState({
