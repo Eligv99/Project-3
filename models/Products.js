@@ -23,7 +23,10 @@ module.exports = (sequelize, DataTypes) => {
         category: {
             type: DataTypes.FLOAT
         },
-
+        quantity: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
     },
     {
         timeStamps: false

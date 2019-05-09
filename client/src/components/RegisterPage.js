@@ -36,7 +36,7 @@ class RegisterPage extends Component {
             // USER DATA
             let user = response.data;
 
-            console.log(user)
+            window.location.assign('/login')
 
             // VERIFY FOR EMAIL AND USER
             if (user && user.email && user.first_name && user.last_name) {
@@ -46,22 +46,27 @@ class RegisterPage extends Component {
                 this.setState({
                     errMessage: null
                 });
-
-                return <Redirect to="/" />;
             }
             else {
                 this.setState({
-                    errMessage: "Could not log in. Try again."
+                    errMessage: "Couldn't sign up. Try again"
                 });
             }
         }).catch(error => {
             this.setState({
-                errMessage: "Could not log in, Try again."
+                errMessage: "Error."
             });
         })
     }
 
     render() {
+
+        // FINDING ERRORS
+        var err;
+
+        if(this.state.errMessage === "Try Again"){
+            err = alert(this.state.errMessage)
+        }
 
         // IF YOU FIND A USER SEND IT TO HOMEPAGE
         if (this.props.user && this.props.user.email) {

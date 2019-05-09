@@ -20,12 +20,14 @@ class LoginPage extends Component {
         })
     }
 
+
     handleFormSubmit = event => {
         event.preventDefault();
         console.log(event.target);
         AUTHAPI.loginUser({
             email: this.state.email,
             password: this.state.password
+
         }).then(response => {
 
             // USER DATA
@@ -35,13 +37,19 @@ class LoginPage extends Component {
             
             // VERIFY FOR EMAIL AND USER
             if (user && user.email) {
+
+                window.location.assign('/')
                 
                 this.props.setUser(user);
+                
                 this.setState({
                     errMessage: "User Logged in."
                 });
             }
             else {
+                
+                window.location.assign('/login')
+
                 this.setState({
                     errMessage: "Try again."
                 });
@@ -50,17 +58,25 @@ class LoginPage extends Component {
         .catch(error => {
 
             this.setState({
-                errMessage: "Error."
+                errMessage: "Try Again"
             });
         })
     }
 
     render() {
 
+        var err;
+       
+        
+        if(this.state.errMessage === "Try Again"){
+            window.location.assign('/login')
+        }
+
         // IF YOU FIND A USER SEND IT TO HOMEPAGE
         if (this.props.user && this.props.user.email) {
             return <Redirect to="/" />;
         }
+
         return (
             <div>
                 <div className="form-block">
@@ -95,8 +111,6 @@ class LoginPage extends Component {
                                     id="password"
                                 />
                             </div>
-
-                            <div className="err-message">{this.state.errMessage}</div>
                             
                             <button type="submit" onClick={this.handleFormSubmit} className="btn-login">
                                 Login                            

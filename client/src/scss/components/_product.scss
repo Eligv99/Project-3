@@ -58,8 +58,8 @@ a.bypassInterstitialPage {
     img {
       cursor: zoom-in;
       width: 239px;
-      // float: left;
       height: auto;
+      padding: 3%;
       transition: transform 300ms ease-in;
       transform: scale(1);
       @media (min-width: 991px) {

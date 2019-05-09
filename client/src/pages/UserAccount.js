@@ -1,9 +1,63 @@
-import React, { Component } from 'react';
-import AUTHAPI from '../utils/local-auth';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import axios from "axios";
+import Header from "../components/Header";
+import InfoBar from "../components/InfoBar"
+import Footer from "../components/Footer";
+import AUTHAPI from "../utils/local-auth"
+import UserData from "../components/UserData"
+import "../scss/style.scss";
 
-class UserData extends Component{
-    
+class Login extends Component {
+    constructor() {
+        super();
+        this.state = {
+            products: [],
+            cart: [],
+            totalItems: 0,
+            totalAmount: 0,
+            term: "",
+            cartBounce: false,
+            modalActive: false
+        };
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleMobileSearch = this.handleMobileSearch.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+    // Fetch Initial Set of Products from external API
+
+    // Search by Keyword
+    handleSearch(event) {
+        this.setState({ term: event.target.value });
+    }
+    // Mobile Search Reset
+    handleMobileSearch() {
+        this.setState({ term: "" });
+    }
+
+    // Open Modal
+    openModal(product) {
+        this.setState({
+            quickViewProduct: product,
+            modalActive: true
+        });
+    }
+    // Close Modal
+    closeModal() {
+        this.setState({
+            modalActive: false
+        });
+    }
+
+    logout = () => {
+        AUTHAPI.getLogout().then( out => {
+          this.setState({
+            user: {}
+          })
+          window.location = '/logout';
+        })
+    };
+
     componentDidMount = () => {
         AUTHAPI.getUserData().then( userResponse => {
             if(userResponse.data){
@@ -12,59 +66,38 @@ class UserData extends Component{
         })
     }
 
-    logout = () => {
-        AUTHAPI.getLogout().then( out => {
-          this.setState({
-            user: {}
-          })
-          window.location = '/account';
-        })
-    };
-
     render() {
 
-        const f_name = (this.props.user.first_name);
-        const s_name = (this.props.user.last_name);
-        const email = (this.props.user.email);
-
-        console.log(this.props.user)
 
         return (
-            <div className="user-data">
-                <div className="user-block">
-                    { this.props.user.email ? (
+            <div className="container">
+                <Header
+                    cartBounce={this.state.cartBounce}
+                    total={this.state.totalAmount}
+                    totalItems={this.state.totalItems}
+                    cartItems={this.state.cart}
+                    removeProduct={this.handleRemoveProduct}
+                    handleSearch={this.handleSearch}
+                    handleMobileSearch={this.handleMobileSearch}
+                    handleCategory={this.handleCategory}
+                    categoryTerm={this.state.category}
+                    updateQuantity={this.updateQuantity}
+                    productQuantity={this.state.moq}
+                    logout={this.logout}
+                    user ={this.props.user.email}
+                />
+                <InfoBar />
 
-                        <ul>
-                            <li> First Name : {f_name} </li>
-                            <br/>
-                            <li> Last Name : {s_name} </li>
-                            <br/>
-                            <li> Email : {email} </li>
-                        </ul>) 
-                        // TRUE
-                        : 
-                        // FALSE
-                        (<p>{`Please sign in at `} <Link to="/signup">Sign Up</Link> OR <Link to="/login">Login</Link></p>)
-                    }
-
-                    <br/>
-
-                    <Link to="/">
-                        <button>Home</button>
-                    </Link>
-
-                    <br/>
-                    <br/>
-
-
-                    <Link>
-                        <button onClick={this.logout}>Logout</button>
-                    </Link>
-
-                </div>
+                <UserData
+                    first={this.props.user.first_name}
+                    last={this.props.user.last_name}
+                    email={this.props.user.email}
+                />
+                
+                <Footer />
             </div>
         );
     }
-}
+};
 
-export default UserData;
+export default Login;

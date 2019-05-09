@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from "../components/Header";
 import InfoBar from "../components/InfoBar"
 import Footer from "../components/Footer";
+import AUTHAPI from "../utils/local-auth"
 import Register from "../components/RegisterPage"
 import "../scss/style.scss";
 
@@ -151,6 +152,23 @@ class App extends Component {
         });
     }
 
+    logout = () => {
+        AUTHAPI.getLogout().then( out => {
+          this.setState({
+            user: {}
+          })
+          window.location = '/logout';
+        })
+    };
+
+    componentDidMount = () => {
+        AUTHAPI.getUserData().then( userResponse => {
+            if(userResponse.data){
+                this.props.setUser(userResponse.data);
+            }
+        })
+    }
+
     render() {
         return (
             <div className="container">
@@ -166,6 +184,8 @@ class App extends Component {
                     categoryTerm={this.state.category}
                     updateQuantity={this.updateQuantity}
                     productQuantity={this.state.moq}
+                    logout={this.logout}
+                    user ={this.props.user.email}
                 />
                 <InfoBar />
 

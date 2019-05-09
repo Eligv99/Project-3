@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link, withRouter} from 'react-router-dom'
 import CartScrollBar from "./CartScrollBar";
 import EmptyCart from "../empty-states/EmptyCart";
+import AUTHAPI from '../utils/local-auth'
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import { findDOMNode } from 'react-dom';
 
@@ -11,7 +12,8 @@ class Header extends Component {
     this.state = {
       showCart: false,
       cart: this.props.cartItems,
-      mobileSearch: false
+      mobileSearch: false,
+      
     };
   }
   
@@ -49,12 +51,14 @@ class Header extends Component {
   handleClickOutside(event) {
     const cartNode = findDOMNode(this.refs.cartPreview);
     // const buttonNode = findDOMNode(this.refs.cartButton);
-    if (cartNode.classList.contains("active")) {
-      if (!cartNode) {
-        this.setState({
-          showCart: false
-        });
-        event.stopPropagation();
+    if(window.location.href === '/'){
+      if (cartNode.classList.contains("active")) {
+        if (!cartNode) {
+          this.setState({
+            showCart: false
+          });
+          event.stopPropagation();
+        }
       }
     }
   }
@@ -74,13 +78,16 @@ class Header extends Component {
     );
   }
 
-  logOut(e) {
-    e.preventDefault()
-    localStorage.removedItem('usertoken')
-    this.props.history.push('/')
+  logout = () => {
+    AUTHAPI.getLogout().then( out => {
+      this.setState({
+        user: {}
+      })
+      window.location.assign('/account');
+    })
+};
 
-  }
-  render() {
+render() {
     let cartItems;
     cartItems = this.state.cart.map(product => {
       return (
@@ -142,12 +149,12 @@ class Header extends Component {
     let userLinks = (
       <ul className="">
         <li className="">
-          <Link to="/profile" className="a-auth">
+          <Link to="/account" className="a-auth">
             Account Or
           </Link>
         </li>
         <li className="">
-          <a href="" onClick={this.logOut.bind(this)} className="a-auth">
+          <a href="/" onClick={this.logout.bind(this)} className="a-auth">
             Logout
           </a>
         </li>

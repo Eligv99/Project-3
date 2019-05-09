@@ -47,11 +47,11 @@ module.exports = function(passport) {
                 }
                 // IF IT MATCHES SUCCEED
                 if (isMatch) {
-                    return done(null, user, { message: "Password Incorrect" });
+                    return done(null, user, { message: "You are logged in" });
                 }
                 // IF NOT SEND THEN MESSAGE 
                 else {
-                    done(null, false, alert("Password incorrect"))
+                    done(null, false, { message: "Incorrect password" })
                 }
             })
 

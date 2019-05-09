@@ -37,7 +37,11 @@ class App extends Component {
                 <Homepage {...this.props} setUser={this.setUser} user={this.state.user} />
               )
               } />
-            <Route exact path="/support" component={SupportPage} />
+            <Route exact path="/support" render ={
+              () => (
+                <SupportPage {...this.props} setUser={this.setUser} user={this.state.user} />
+              )
+              } />
             <Route exact path="/account" render={
               () => (
                 <Account {...this.props} setUser={this.setUser} user={this.state.user} />

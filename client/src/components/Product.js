@@ -94,13 +94,10 @@ class Product extends Component {
               <li className="price-item product-price">{this.props.price} </li>
 
             </ul>
-            {/* <h4 className="product-name">{this.props.name}</h4> 
-            <h5 className="product-name">{this.props.description}</h5>
-            <p className="product-price">{this.props.price}</p>  */}
             
           </div>
           <Counter
-            productQuantity={quantity}
+            productQuantity={this.state.quantity}
             updateQuantity={this.props.updateQuantity}
             resetQuantity={this.resetQuantity}
           />

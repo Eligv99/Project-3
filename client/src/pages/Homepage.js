@@ -173,6 +173,15 @@ class App extends Component {
           window.location = '/logout';
         })
     };
+
+    componentDidMount = () => {
+        AUTHAPI.getUserData().then( userResponse => {
+            if(userResponse.data){
+                this.props.setUser(userResponse.data);
+            }
+        })
+    }
+
     
 
     render() {
