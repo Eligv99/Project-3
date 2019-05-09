@@ -8,6 +8,25 @@
   height: 45%;
 }
 
+.text-product {
+  float: right;
+  margin-right: 12em;
+}
+
+li.title-item {
+  font-size: 2em;
+  margin-bottom: 20%;
+}
+
+li.price-item {
+  font-size: 2pc;
+}
+
+li.desc-item {
+  font-size: 110%;
+  margin-bottom: 19%;
+}
+
 #dim-Category {
   padding: 8%;
 }
@@ -31,7 +50,7 @@ a.bypassInterstitialPage {
   border-radius: 2px;
   .product-image {
     overflow: hidden;
-    height: 26em;
+    height: 22em;
     width: 47em;
     padding: 1em;
     border-radius: 2px 2px 0 0;
@@ -67,8 +86,6 @@ a.bypassInterstitialPage {
     font-size: 22px;
     font-weight: 700;
     position: relative;
-    top: -4em;
-    left: 38%;
     line-height: 22px;
     margin-bottom: 16px;
     &:before {
@@ -103,7 +120,6 @@ a.bypassInterstitialPage {
   color: $gray-medium;
   max-width: 120px;
   position: relative;
-  left: 4em;  
   margin: 0 auto;
   .increment,
   .decrement {

@@ -1,3 +1,4 @@
+
 var localStrategy = require("passport-local").Strategy;
 var bcrypt = require('bcrypt');
 var db = require("../models");
@@ -37,7 +38,7 @@ module.exports = function(passport) {
 
             // IF THERES NOT A USER SEND A MESSAGE
             if (!user) {
-                return done(null, false, { message: "No User Found!" });
+                return done(null, false,  { message: "No User Found!" });
             }
             //VERIFY PASSWORD WITH BYCRYPT
             bcrypt.compare(password, user.dataValues.password, (err, isMatch) => {
@@ -46,11 +47,11 @@ module.exports = function(passport) {
                 }
                 // IF IT MATCHES SUCCEED
                 if (isMatch) {
-                    return done(null, user);
+                    return done(null, user, { message: "Password Incorrect" });
                 }
                 // IF NOT SEND THEN MESSAGE 
                 else {
-                    return done(null, false, { message: "Password Incorrect" })
+                    done(null, false, alert("Password incorrect"))
                 }
             })
 

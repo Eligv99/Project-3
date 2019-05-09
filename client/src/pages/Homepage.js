@@ -191,6 +191,8 @@ class App extends Component {
                     updateQuantity={this.updateQuantity}
                     productQuantity={this.state.moq}
                     logout={this.logout}
+                    user ={this.props.user.email}
+
                 />
                 <InfoBar />
                 <Products

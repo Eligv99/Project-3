@@ -38,17 +38,19 @@ class LoginPage extends Component {
                 
                 this.props.setUser(user);
                 this.setState({
-                    errMessage: null
+                    errMessage: "User Logged in."
                 });
             }
             else {
                 this.setState({
-                    errMessage: "Could not log in. Try again."
+                    errMessage: "Try again."
                 });
             }
-        }).catch(error => {
+        })
+        .catch(error => {
+
             this.setState({
-                errMessage: "Could not log in, Try again."
+                errMessage: "Error."
             });
         })
     }
@@ -94,7 +96,8 @@ class LoginPage extends Component {
                                 />
                             </div>
 
-
+                            <div className="err-message">{this.state.errMessage}</div>
+                            
                             <button type="submit" onClick={this.handleFormSubmit} className="btn-login">
                                 Login                            
                             </button>

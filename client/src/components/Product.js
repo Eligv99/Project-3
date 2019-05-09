@@ -12,6 +12,8 @@ class Product extends Component {
       isAdded: false
     };
   }
+
+  // USE THIS FOR OUR CART MODEL
   addToCart(image, name, price, id, quantity) {
     this.setState(
       {
@@ -41,6 +43,8 @@ class Product extends Component {
       }
     );
   }
+
+  
   quickView(image, name, price, id) {
     this.setState(
       {
@@ -85,9 +89,9 @@ class Product extends Component {
            
             <ul>
 
-              <li className=""><h4>{this.props.name}</h4></li>
-              <li className="">{this.props.description} </li>
-              <li className="">{this.props.price} </li>
+              <li className="title-item"><h4>{this.props.name}</h4></li>
+              <li className="desc-item">{this.props.description} </li>
+              <li className="price-item product-price">{this.props.price} </li>
 
             </ul>
             {/* <h4 className="product-name">{this.props.name}</h4> 
