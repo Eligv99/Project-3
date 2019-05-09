@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         quantity: {
             type: DataTypes.INTEGER,
-            defaultValue: 0
+            
         },
     },
     {

@@ -13,7 +13,6 @@ class Header extends Component {
       showCart: false,
       cart: this.props.cartItems,
       mobileSearch: false,
-      
     };
   }
   
@@ -98,10 +97,11 @@ render() {
             <p className="product-price">{product.price}</p>
           </div>
           <div className="product-total">
+
             <p className="quantity">
               {product.quantity} {product.quantity > 1 ? "Nos." : "No."}{" "}
             </p>
-            <p className="amount">{product.quantity * product.price}</p>
+            {/* <p className="amount">{product.quantity * product.price}</p> */}
           </div>
           <a
             className="product-remove"
@@ -160,6 +160,7 @@ render() {
         </li>
       </ul>
     )
+
     return (
       <header>
         <div className="container">
@@ -216,18 +217,18 @@ render() {
             <div className="cart-info">
               <table>
                 <tbody>
+                  {/* <tr>
+                    <td>Sub Total</td>
+                    <td>:</td>
+                    <td>
+                      <strong>{this.props.total}</strong>
+                    </td>
+                  </tr> */}
                   <tr>
                     <td>No. of items</td>
                     <td>:</td>
                     <td>
                       <strong>{this.props.totalItems}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Sub Total</td>
-                    <td>:</td>
-                    <td>
-                      <strong>{this.props.total}</strong>
                     </td>
                   </tr>
                 </tbody>

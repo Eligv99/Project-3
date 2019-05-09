@@ -72,9 +72,10 @@ class App extends Component {
 
         let cartItem = this.state.cart;
         let productID = selectedProducts.id;
-        let productQty = selectedProducts.qty;
+        let productQty = selectedProducts.quantity;
 
         if (this.checkProduct(productID)) {
+            
             console.log("hi");
 
             let index = cartItem.findIndex(x => x.id == productID);
@@ -98,7 +99,7 @@ class App extends Component {
             function () {
                 this.setState({
                     cartBounce: false,
-                    quantity: 1
+                    quantity: 0
                 });
                 console.log(this.state.quantity);
                 console.log(this.state.cart);
